@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #81D4FA;
+            padding: 20px;
+            height: 100vh;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h2 {
+            color: #1e3a8a;
+        }
+
+        select, input[type="number"], button {
+            padding: 10px;
+            margin: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        table {
+            margin-top: 20px;
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #e0f7fa;
+            color: #1e3a8a;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #1e3a8a;
+        }
+
+        th {
+            background-color: #1e3a8a;
+            color: white;
+        }
+
+        // td {
+            background-color: #b3e0f1; 
+        } //
+
+        .fila-par {
+            background-color: #add8e6; // Azul celeste //
+            border: 1px solid #1e3a8a;
+        }
+        .fila-impar {
+            background-color: #ffffff; // Blanco //
+            border: 1px solid #1e3a8a;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Simulador de Préstamos</h2>
+
+          <font color="#1e3a8a"><b>Haz click <a href="https://wa.me/529512083858?text=Deseo%20información%20sobre%20el%20préstamo" target="_blank">AQUI</a> para mas info</b></font><br>
+
+        <label for="tipo">Dependencia:</label>
+        <select id="tipo">
+
+            <option value="DEPENDENCIA">Selecciona Dependencia</option>
+            <option value="HABERES">BOMBEROS, ESTATALES, PABIC</option>
+            <option value="CECYTE">CECYTE</option>
+            <option value="COBAO">COBAO</option>
+            <option value="GOBIERNO">TRAB GOBIERNO OAX</option>
+            <option value="SNTE22">SNTE22 - IEEPO</option>
+
+        </select>
+        <br>
+        <label for="monto">Ingresa el MONTO:</label>
+        <input type="number" id="monto" placeholder="Monto requerido" required>
+        <br>
+           <button onclick="calcular()">CALCULAR</button>
+        
+        <table id="resultados" style="display:none;">
+            <thead>
+                <tr>
+                    <th>Plazos</th>
+                    <th>Descuentos</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="fila-par">
+                    <td id="montoValor1"></td>
+                    <td id="resultadoValor1"></td>
+                </tr>
+                <tr class="fila-impar"> 
+                    <td id="montoValor2"></td> 
+                    <td id="resultadoValor2"></td> 
+                </tr>
+                <tr class="fila-par"> 
+                    <td id="montoValor3"></td> 
+                    <td id="resultadoValor3"></td> 
+                </tr>
+                <tr class="fila-impar"> 
+                    <td id="montoValor4"></td> 
+                    <td id="resultadoValor4"></td> 
+                </tr>
+                <tr class="fila-par"> 
+                    <td id="montoValor5"></td> 
+                    <td id="resultadoValor5"></td> 
+                </tr>
+                <tr class="fila-impar"> 
+                    <td id="montoValor6"></td> 
+                    <td id="resultadoValor6"></td>
+                </tr>
+                <tr class="fila-par"> 
+                    <td id="montoValor7" colspan="2"></td> 
+                </tr>
+            </tbody>
+        </table>
+
+<table>
+        <td><font color="#1e3a8a"><b>Haz click <a href="https://wa.me/529512083858?text=Deseo%20información%20sobre%20el%20préstamo" target="_blank">AQUI</a> para mas info</b></font></td>
+</table>
+
+    </div>
+
+
+
+    <script>
+
+        function calcular() {
+            let tipo = document.getElementById("tipo").value;
+            let monto = parseFloat(document.getElementById("monto").value);
+            let resultado = 0;
+
+            if (isNaN(monto) || monto <= 0) 
+              {
+                alert("Por favor ingrese un monto válido.");
+                return;
+              }
+
+            switch (tipo) 
+            {
+                case "DEPENDENCIA":
+                    alert("Por favor, selecciona una DEPENDENCIA.");
+                    descuento = " ";
+                    break;
+
+                case "CECYTE":
+                    descuento1 = monto * 1.403680 / 24;
+                    descuento2 = monto * 1.605520 / 36;
+                    descuento3 = monto * 1.807360 / 48;
+                    descuento4 = monto * 2.211040 / 72;
+                    descuento5 = monto * 0;
+                    descuento6 = monto * 0;
+                    document.getElementById("montoValor1").textContent = "24 Quincenas";
+                    document.getElementById("montoValor2").textContent = "36 Quincenas";
+                    document.getElementById("montoValor3").textContent = "48 Quincenas";
+                    document.getElementById("montoValor4").textContent = "72 Quincenas";
+                    document.getElementById("montoValor5").textContent = "--";
+                    document.getElementById("montoValor6").textContent = "--";
+                    document.getElementById("montoValor7").textContent = "--";
+                break;
+
+                case "COBAO":
+                    descuento1 = monto * 1.445440 / 24;
+                    descuento2 = monto * 1.668160 / 36;
+                    descuento3 = monto * 1.890880 / 48;
+                    descuento4 = monto * 2.336320 / 72;
+                    descuento5 = monto * 0;
+                    descuento6 = monto * 0;
+                    document.getElementById("montoValor1").textContent = "24 Quincenas";
+                    document.getElementById("montoValor2").textContent = "36 Quincenas";
+                    document.getElementById("montoValor3").textContent = "48 Quincenas";
+                    document.getElementById("montoValor4").textContent = "72 Quincenas";
+                    document.getElementById("montoValor5").textContent = "--";
+                    document.getElementById("montoValor6").textContent = "--";
+                    document.getElementById("montoValor7").textContent = "--";
+
+                break;
+
+                case "GOBIERNO":
+                    descuento1 = monto * 1.417600 / 24;
+                    descuento2 = monto * 1.626400 / 36;
+                    descuento3 = monto * 1.835200 / 48;
+                    descuento4 = monto * 2.252800 / 72;
+                    descuento5 = monto * 2.670400 / 96;
+                    descuento6 = monto * 0;
+                    document.getElementById("montoValor1").textContent = "24 Quincenas";
+                    document.getElementById("montoValor2").textContent = "36 Quincenas";
+                    document.getElementById("montoValor3").textContent = "48 Quincenas";
+                    document.getElementById("montoValor4").textContent = "72 Quincenas";
+                    document.getElementById("montoValor5").textContent = "96 Quincenas";
+                    document.getElementById("montoValor6").textContent = "--";
+                    document.getElementById("montoValor7").textContent = "--";
+                break;
+
+                case "HABERES":
+                    descuento1 = monto * 1.835200 / 48;
+                    descuento2 = monto * 2.252800 / 72;
+                    descuento3 = monto * 0;
+                    descuento4 = monto * 0;
+                    descuento5 = monto * 0;
+                    descuento6 = monto * 0;
+                    document.getElementById("montoValor1").textContent = "48 Quincenas";
+                    document.getElementById("montoValor2").textContent = "72 Quincenas";
+                    document.getElementById("montoValor3").textContent = "--";
+                    document.getElementById("montoValor4").textContent = "--";
+                    document.getElementById("montoValor5").textContent = "--";
+                    document.getElementById("montoValor6").textContent = "--";
+                    document.getElementById("montoValor7").textContent = "Incluye: Policías Auxiliares, Bancarios y Viales";
+                break;
+
+                case "SNTE22":
+                    descuento1 = monto * 1.417597 / 24;
+                    descuento2 = monto * 1.626394 / 36;
+                    descuento3 = monto * 1.835183 / 48;
+                    descuento4 = monto * 2.252797 / 72;
+                    descuento5 = monto * 2.670389 / 96;
+                    descuento6 = monto * 3.087957 / 120;
+                    document.getElementById("montoValor1").textContent = "24 Quincenas";
+                    document.getElementById("montoValor2").textContent = "36 Quincenas";
+                    document.getElementById("montoValor3").textContent = "48 Quincenas";
+                    document.getElementById("montoValor4").textContent = "72 Quincenas";
+                    document.getElementById("montoValor5").textContent = "96 Quincenas";
+                    document.getElementById("montoValor6").textContent = "120 Quincenas";
+                    document.getElementById("montoValor7").textContent = "--";
+                break;
+
+            }
+
+            // Mostrar los resultados en la tabla
+
+            document.getElementById("resultadoValor1").textContent = descuento1.toFixed(2);
+            document.getElementById("resultados").style.display = "table";
+
+            document.getElementById("resultadoValor2").textContent = descuento2.toFixed(2);
+            document.getElementById("resultados").style.display = "table";
+
+            document.getElementById("resultadoValor3").textContent = descuento3.toFixed(2);
+            document.getElementById("resultados").style.display = "table";
+
+            document.getElementById("resultadoValor4").textContent = descuento4.toFixed(2);
+            document.getElementById("resultados").style.display = "table";
+
+            document.getElementById("resultadoValor5").textContent = descuento5.toFixed(2);
+            document.getElementById("resultados").style.display = "table";
+
+            document.getElementById("resultadoValor6").textContent = descuento6.toFixed(2);
+            document.getElementById("resultados").style.display = "table";
+
+            document.getElementById("resultadoValor7").textContent = descuento7.toFixed(2);
+            document.getElementById("resultados").style.display = "table";
+        }
+    </script>
+
+</body>
+</html>
